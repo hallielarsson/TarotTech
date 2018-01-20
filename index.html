@@ -8,16 +8,29 @@
   <body>
     <div id="app">
       <div class="techs">
-        <div class="all_cards">
-          <card v-for='card in card_list' v-bind:card="card" :key="card.id"></card>
-
-        </div>
         <div class="new_card">
           Name: <input v-model="input.name"/>
           Description: <input v-model="input.description"/>
           <button @click="add_card()">Add Card</button>
         </div>
+        <div class="controls">Show Card List: <input type="checkbox" v-model="display.show_card_list"/></div>
+        <div class="all_cards" v-if="display.show_card_list">
+          <card v-for='card in card_list' v-bind:card="card" :key="card.id"></card>
+        </div>
+
+
+        <div class="new_tech">
+          Name: <input v-model="input.tech.name"/>
+          Description: <input v-model="input.tech.description"/>
+          <button @click="add_tech()">Add Tech</button>
+        </div>
+
         <div class="tech" v-for="tech in techs">
+          <div class="name">{{ tech.name }}</div>
+          <div class="description">{{ tech.description }}</div>
+          <div class="discard">
+            <card v-for='card in tech.discard' v-bind:card="card" :key="card.id"></card>
+          </div>
         </div>
       </div>
     </div>

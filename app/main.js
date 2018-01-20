@@ -2,11 +2,11 @@ var card_list = card_list? card_list : [];
 
 var main_deck = [];
 
-function Tech(name, tags){
+function Tech(name, description, tags){
   this.discard = [];
-  this.tags = [];
+  this.tags = tags;
   this.name = name;
-  this.description = "";
+  this.description = description;
 }
 
 Tech.prototype = {
@@ -40,14 +40,23 @@ var app = new Vue({
     main_discard: [],
     hand: [],
     techs: [],
+    display: {
+      show_card_list: false,
+    },
     input: {
-      new_name: "",
-      new_tags: [],
+      name: "",
+      description: "",
+      tags: [],
+      tech: {
+        name: "",
+        description: "",
+        tags: "",
+      }
     }
   },
   methods: {
     add_tech: function(){
-      var tech = new Tech(this.input.name, this.input.tags);
+      var tech = new Tech(this.input.tech.name, this.input.tech.description, this.input.tech.tags);
       this.reset_input();      
       this.techs.push(tech);
     },
@@ -61,6 +70,10 @@ var app = new Vue({
       this.input.name = "";
       this.input.description = "";
       this.input.tags = [];
+
+      this.input.tech.name = "";
+      this.input.tech.description = "";
+      this.input.tech.tags = [];
     },
 
     shuffle_deck: function(deck){
