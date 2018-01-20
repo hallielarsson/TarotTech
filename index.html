@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vuex@3.0.1/dist/vuex.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+  </head>
+  <body>
+    <div id="app">
+      <div class="techs">
+        <div class="all_cards">
+          <card v-for='card in card_list' v-bind:card="card" :key="card.id"></card>
+
+        </div>
+        <div class="new_card">
+          Name: <input v-model="input.name"/>
+          Description: <input v-model="input.description"/>
+          <button @click="add_card()">Add Card</button>
+        </div>
+        <div class="tech" v-for="tech in techs">
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script type="text/x-template" id="card-template">
+  <div class='card'>
+    <div class='name'>{{ card.name }}</div>
+    <div class='description'>{{ card.description }}</div>
+    <div class='tags'><span class='tag' v-for='tag in card.tags'>{{ tag }}</span></div>
+  </div>
+</script>
+
+<script src="app/main.js"></script>
