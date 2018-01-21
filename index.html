@@ -28,6 +28,7 @@
         <div class="tech" v-for="tech in techs">
           <div class="name">{{ tech.name }}</div>
           <div class="description">{{ tech.description }}</div>
+          <div class="tags"><span class="tag" v-for="tag in tech.tags">{{ tag }}</div>
           <div class="discard">
             <card v-for='card in tech.discard' v-bind:card="card" :key="card.id"></card>
           </div>
@@ -42,6 +43,16 @@
     <div class='name'>{{ card.name }}</div>
     <div class='description'>{{ card.description }}</div>
     <div class='tags'><span class='tag' v-for='tag in card.tags'>{{ tag }}</span></div>
+  </div>
+</script>
+
+<script type="text/x-template" id="create-patron-template">
+  <div class='create-patron'>
+    <input class='name' v-model="patron.name"></input>   
+    <div class="questions" v-for="question in patron.playbook.questions" :key="question.id">
+      <div class="question">{{ question }}</div>
+      <textarea v-model="patron.answers[question.id]"></textarea>
+    </div>
   </div>
 </script>
 

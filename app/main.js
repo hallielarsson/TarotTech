@@ -2,8 +2,33 @@ var card_list = card_list? card_list : [];
 
 var main_deck = [];
 
+var tech_tags = [
+  "dirty", "crystal", "broken", "ancient", "sparking", "fizzy", "shiny", "mottled",
+  "heavy", "squirming", "smelly", "twisted", "mesmerizing", "finicky"
+];
+
+function randbetween(low, high){
+  if(typeof high === 'undefined'){
+    high = low;
+    low = 0;
+  }
+  var delta = high - low;
+  offset = Math.floor( Math.random() * delta + 1 );
+  return low + offset;
+}
+
+function random_tag(){
+  return tech_tags[randbetween(0, tech_tags.length - 1)];
+}
+
 function Tech(name, description, tags){
   this.discard = [];
+  for(var i = 0; i < 2; i++){
+    tags.push(random_tag());
+  }
+  if(name == ""){
+    name = "Artifact"
+  }
   this.tags = tags;
   this.name = name;
   this.description = description;
@@ -50,7 +75,7 @@ var app = new Vue({
       tech: {
         name: "",
         description: "",
-        tags: "",
+        tags: [],
       }
     }
   },
